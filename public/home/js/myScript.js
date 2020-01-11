@@ -1,0 +1,1 @@
+$(".owl-prev").attr("class","abc");

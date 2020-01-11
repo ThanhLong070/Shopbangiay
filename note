@@ -1,0 +1,3 @@
+tao thêm bảng size với color, status,brand,subCategories,bảng gender,info,cart
+list_size= id_color + id_color + quantity
+trong bẳng products thêm user_id,bỏ quantity và thay sale_price bằng discount có thêm id_brand 
