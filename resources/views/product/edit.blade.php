@@ -30,22 +30,54 @@
                 </div>
                 <div class="form-group">
                     <label for="description">Mô tả:</label>
-                    <textarea id="description" name="description" rows="10" class="form-control">{{$product->description}}</textarea>
-                        <script>
-                // Replace the <textarea id="editor1"> with a CKEditor
-                // instance, using default configuration.
-                CKEDITOR.replace( 'description' );
-            </script>
-                   
+                    <textarea id="my-editor" name="description" class="form-control">{{$product->description}}</textarea>
                 </div>
-                <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label for="price">Ảnh đại diện:</label>
+                        <fieldset class="form-group">
+
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn btn-light ">
+                                        <i class="fa fa-picture-o"></i> Choose
+                                    </a>
+                                </span>
+                                <input id="thumbnail" class="form-control" type="text" name="image"
+                                value="{{old('image',isset($product)? $product->image: null)}}">
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                            @if($product->image)
+                            <img src="{{$product->image}}" alt="" height="200" alt="">
+                            @endif
+
+                        </fieldset>
+
+                        <label for="price">Ảnh chi tiết:</label>
+                        @for($lfm=1;$lfm<5;$lfm++)
+                        <div class=" ">
+                            <div class="input-group ">
+                                <span class="input-group-btn">
+                                    <a id="lfm{{$lfm}}" data-input="thumbnail{{$lfm}}" data-preview="holder{{$lfm}}"
+                                    class="btn btn-dark">
+                                    <i class="fa fa-picture-o"></i> Choose
+                                </a>
+                            </span>
+                            <input id="thumbnail{{$lfm}}" class="form-control " type="text"
+                            name="imageDetail[]">
+                        </div>
+                        <img id="holder{{$lfm}}" style="margin-top:15px;max-height:100px;">
+                    </div>
+                    @endfor
+                </div>
+               {{--  <div class="form-group">
                     <label for="img">Hình ảnh:</label>
                     <input id="img" name="image" type="file" value="{{$product->image}}">
                 </div>
              
                  <div>
                     <img id="blah" src="{{$product->image}}" alt="your image" width="200" height="auto"/>
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <label for="price">Giá sản phẩm:</label>
                     <input id="price" name="price" class="form-control" value="{{$product->price}}">
@@ -93,5 +125,36 @@ $("#imgInp").change(function() {
         $image.attr("src", $(this).attr("src"));  
         });
         $downloadingImage.attr("src", "http://an.image/to/aynchrounously/download.jpg");
+</script>
+
+
+<script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+<script>
+  var options = {
+    filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+    filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+    filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+    filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+  };
+</script>
+<script>
+CKEDITOR.replace('my-editor', options);
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="/vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
+<script>
+$('textarea.my-editor').ckeditor(options);
+</script>
+
+
+<script src="/vendor/laravel-filemanager/js/lfm.js"></script>
+<script>
+
+    $('#lfm').filemanager('file');
+    $('#lfm').filemanager('image');
+    for (var i = 0; i < 5; i++) {
+        $('#lfm' + i).filemanager('image');
+
+    }
 </script>
 @stop

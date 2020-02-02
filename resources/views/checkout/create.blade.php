@@ -96,10 +96,11 @@
                         </form>
                     </div>
                     <div class="col-lg-4">
-                        <div class="order_box">                           
+                        <div class="order_box" style="width: 400px;">                           
                             <h2>Đơn hàng của bạn</h2>
                             <ul class="list">
                                 <li><a href="#">Sản phẩm <span>Thành tiền</span></a></li>
+                           
                                 @foreach($cart->items as  $item)
                                 @php 
 
@@ -107,35 +108,14 @@
 
                                 @endphp
 
-                                <li><a href="#">{{ $item['name'] }} <span class="middle">x 0{{ $item['quantity'] }}</span><span class="last">{{ number_format($thanhtien) }}VNĐ</span></a></li>
+                                <li>
+                                    <a href="#">{{ $item['name'] }} <span class="middle">x 0{{ $item['quantity'] }}</span><span class="last">{{ number_format($thanhtien) }}VNĐ</span></a></li>
 
                                 @endforeach
                             </ul>
                             <ul class="list list_2">
                                 <li><a href="#">Tổng cộng <span>{{ number_format($cart->total_price) }}VNĐ</span></a></li>
                             </ul>
-                            <div class="payment_item">
-                                <div class="radion_btn">
-                                    <input type="radio" id="f-option5" name="selector">
-                                    <label for="f-option5">Kiểm tra thanh toán</label>
-                                    <div class="check"></div>
-                                </div>
-                                <p>Vui lòng gửi bản kiểm tra đến Tên Cửa hàng, Phố Cửa hàng, Cửa hàng Thị trấn, Cửa hàng Bang / Quận, Mã bưu điện.</p>
-                            </div>
-                            <div class="payment_item active">
-                                <div class="radion_btn">
-                                    <input type="radio" id="f-option6" name="selector">
-                                    <label for="f-option6">Momo </label>
-                                    <img src="{{ asset('home') }}/img/product/card.jpg" alt="">
-                                    <div class="check"></div>
-                                </div>
-                                <p>Thanh toán qua Momo; bạn có thể thanh toán bằng thẻ tín dụng nếu bạn không có tài khoản Momo.</p>
-                            </div>
-                            <div class="creat_account">
-                                <input type="checkbox" id="f-option4" name="selector">
-                                <label for="f-option4">Tôi đã đọc và chấp nhận các </label> 
-                                <a href="#"> điều khoản và điều kiện *</a>
-                            </div>
                         </div>
                     </div>
                 </div>

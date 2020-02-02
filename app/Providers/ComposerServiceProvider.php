@@ -31,11 +31,11 @@ class ComposerServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
-    {
-        view()->composer(
-            'app',
-            'App\Http\ViewComposers\MovieComposer'
-        );
-    }
+    // public function boot()
+    // {
+    //     view()->composer(
+    //         'app',
+    //         'App\Http\ViewComposers\MovieComposer'
+    //     );
+    // }
 }

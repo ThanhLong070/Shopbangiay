@@ -30,7 +30,7 @@
      <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
                 <div class="pull-right">
-                  <a href="{{ route('admin')}}" onclick="return confirm('Bạn có chắc không')" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{ route('logout')}}" onclick="return confirm('Bạn có chắc không')" class="btn btn-default btn-flat">Sign out</a>
                 </div> 
           </li>
     </ul>

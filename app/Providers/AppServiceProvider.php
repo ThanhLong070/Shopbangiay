@@ -36,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
             $order= DB::table('orders')->orderBy('id','DESC')->get();
             View::share('orders', $order);
         }
+        if(Schema::hasTable('order_items')){
+            $order_items= DB::table('order_items')->orderBy('id','DESC')->get();
+            View::share('order_items', $order_items);
+        }
           view()->composer('*',function($view){
             $view->with([
                 'cart' => new CartHelper()

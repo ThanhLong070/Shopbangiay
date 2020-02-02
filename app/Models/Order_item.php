@@ -10,7 +10,7 @@ class Order_item extends Model
     protected $table = 'order_items';
     public $timestamps = false;
     protected $fillable = [
-    	'product_id','order_id','quantity','price'
+    	'product_id','order_id','quantity','price','sale_price'
     ];
     public function pro()
     {

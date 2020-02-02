@@ -52,9 +52,21 @@
 						<ul class="nav navbar-nav menu_nav ml-auto">
 							<li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Home</a></li>
 							<li class="nav-item"><a href="{{route('about')}}" class="nav-link ">Shop</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{route('login-home')}}">Login</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{route('tracking')}}">Tracking</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
+							{{-- <li class="nav-item"><a class="nav-link" href="{{route('tracking')}}">Tracking</a></li> --}}
+							<li class="nav-item"><a class="nav-link" href="{{route('getContactUs')}}">Contact</a></li>
+
+							@if(Auth::check())
+								<li class="nav-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()->name}}</a></li>
+								@if(Auth::user()->role ==1 )
+										<li class="nav-item"><a class="nav-link" href="{{route('backend')}}"> Quản trị</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
+								@else
+										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
+								@endif
+							@else
+							<li class="nav-item"><a class="nav-link" href="{{route('login')}}">Login</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('register')}}">Register</a></li>
+							@endif
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="{{route('cart')}}" class="cart" style="color:black"><span class="ti-bag"></span>

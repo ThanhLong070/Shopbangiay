@@ -20,19 +20,12 @@
 	<section class="order_details section_gap">
 		<div class="container">
 			<h3 class="title_confirmation">Cảm ơn bạn. Đơn đặt hàng của bạn đã được nhận.</h3>
-			<div class="row order_d_inner">
+			{{-- <div class="row order_d_inner">
 			
 				<div class="col-lg-4">
 					<div class="details_item">
 						<h4>Thông tin đặt hàng</h4>
-						{{-- 
-						<ul class="list">
-							@foreach($orders as $order)
-							<li><a href ="#"><span>Số thứ tự</span>{{ $order->customer_id}}</a></li>
-							<li><a href="#"><span>Tổng cộng</span> : {{ number_format($order->total) }}VNĐ</a></li>
-							<li><a href="#"><span>Payment type</span> : {{ $order->payment }}</a></li>
-							@endforeach
-						</ul> --}}
+						
 					</div>
 				</div>
 		
@@ -121,7 +114,7 @@
 					@endforeach
 				</div>
 			</div>
-		</div>
+		</div> --}}
 	</section>
 	<!--================End Order Details Area =================-->
 @stop()
