@@ -7,43 +7,31 @@
 				<div class="col-lg-12">
 					<div class="active-banner-slider owl-carousel">
 						<!-- single-slide -->
-						<div class="row single-slide align-items-center d-flex">
-							<div class="col-lg-5 col-md-6">
+						@foreach($slides as $key=>$slide)
+						<div class="row single-slide align-items-center d-flex item-slide item-slide-{{$key+1}}">
+							<div class="col-lg-5 col-md-6 slide-desc slide-desc-{{$key+1}}">
 								<div class="banner-content">
-									<h1>Nike New <br>Collection!</h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
+									@if(isset($slide->title))
+									<h1>{{$slide->title}}</h1>
+									@endif
+									@if(isset($slide->descriptions))
+									<p>{{$slide->descriptions}}</p>
+									@endif
+									@if(isset($slide->title_link))
 									<div class="add-bag d-flex align-items-center">
-										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Add to Bag</span>
+										<a class="add-btn" href="{{ route('about') }}"><span class="lnr lnr-cross"></span></a>
+										<span class="add-text text-uppercase">{{$slide->title_link}}</span>
 									</div>
+									@endif
 								</div>
 							</div>
 							<div class="col-lg-7">
 								<div class="banner-img">
-									<img class="img-fluid" src="{{asset('home')}}/img/banner/banner-img.png" alt="">
+									<img class="img-fluid" src="{{$slide->image}}" alt="" style="height: 380.8px;width: 635px;">
 								</div>
 							</div>
 						</div>
-						<!-- single-slide -->
-						<div class="row single-slide">
-							<div class="col-lg-5">
-								<div class="banner-content">
-									<h1>Nike New <br>Collection!</h1>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-										dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-									<div class="add-bag d-flex align-items-center">
-										<a class="add-btn" href=""><span class="lnr lnr-cross"></span></a>
-										<span class="add-text text-uppercase">Add to Bag</span>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-7">
-								<div class="banner-img">
-									<img class="img-fluid" src="{{asset('home')}}/img/banner/banner-img.png" alt="">
-								</div>
-							</div>
-						</div>
+						@endforeach
 					</div>
 				</div>
 			</div>
@@ -61,8 +49,7 @@
 						<div class="f-icon">
 							<img src="{{asset('home')}}/img/features/f-icon1.png" alt="">
 						</div>
-						<h6>Free Delivery</h6>
-						<p>Free Shipping on all order</p>
+						<h6>{{$siteSettings['cot1']}}</h6>
 					</div>
 				</div>
 				<!-- single features -->
@@ -71,8 +58,7 @@
 						<div class="f-icon">
 							<img src="{{asset('home')}}/img/features/f-icon2.png" alt="">
 						</div>
-						<h6>Return Policy</h6>
-						<p>Free Shipping on all order</p>
+						<h6>{{$siteSettings['cot2']}}</h6>
 					</div>
 				</div>
 				<!-- single features -->
@@ -81,8 +67,7 @@
 						<div class="f-icon">
 							<img src="{{asset('home')}}/img/features/f-icon3.png" alt="">
 						</div>
-						<h6>24/7 Support</h6>
-						<p>Free Shipping on all order</p>
+						<h6>{{$siteSettings['cot3']}}</h6>
 					</div>
 				</div>
 				<!-- single features -->
@@ -91,8 +76,7 @@
 						<div class="f-icon">
 							<img src="{{asset('home')}}/img/features/f-icon4.png" alt="">
 						</div>
-						<h6>Secure Payment</h6>
-						<p>Free Shipping on all order</p>
+						<h6>{{$siteSettings['cot4']}}</h6>
 					</div>
 				</div>
 			</div>
@@ -106,63 +90,68 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-8 col-md-12">
 					<div class="row">
-						<div class="col-lg-8 col-md-8">
-							<div class="single-deal">
-								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="{{asset('home')}}/img/category/c1.jpg" alt="">
-								<a href="{{asset('home')}}/img/category/c1.jpg" class="img-pop-up" target="_blank">
-									<div class="deal-details">
-										<h6 class="deal-title">Sneaker for Sports</h6>
+						@if(count($slideHinhLonTren))
+							@foreach($slideHinhLonTren as $item)
+								<div class="col-lg-8 col-md-8">
+									<div class="single-deal">
+										<div class="overlay"></div>
+										<img class="img-fluid w-100" src="{{$item->image}}" alt="" style="height: 191.48px;width:476.66px">
+										<a href="{{$item->image}}" class="img-pop-up" target="_blank">
+											<div class="deal-details">
+												<h6 class="deal-title">{{($item->title)}}</h6>
+											</div>
+										</a>
 									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="single-deal">
-								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="{{asset('home')}}/img/category/c2.jpg" alt="">
-								<a href="{{asset('home')}}/img/category/c2.jpg" class="img-pop-up" target="_blank">
-									<div class="deal-details">
-										<h6 class="deal-title">Sneaker for Sports</h6>
+								</div>
+							@endforeach	
+						@endif
+						@if(count($slide2HinhNho))
+							@foreach($slide2HinhNho as $item)
+								<div class="col-lg-4 col-md-4">
+									<div class="single-deal">
+										<div class="overlay"></div>
+										<img class="img-fluid w-100" src="{{$item->image}}" alt="" style="height: 191.78px;width:223.33px">
+										<a href="{{$item->image}}" class="img-pop-up" target="_blank">
+											<div class="deal-details">
+												<h6 class="deal-title">{{($item->title)}}</h6>
+											</div>
+										</a>
 									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-4">
-							<div class="single-deal">
-								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="{{asset('home')}}/img/category/c3.jpg" alt="">
-								<a href="{{asset('home')}}/img/category/c3.jpg" class="img-pop-up" target="_blank">
-									<div class="deal-details">
-										<h6 class="deal-title">Product for Couple</h6>
+								</div>
+							@endforeach	
+						@endif
+						@if(count($slideHinhLonDuoi))
+							@foreach($slideHinhLonDuoi as $item)
+								<div class="col-lg-8 col-md-8">
+									<div class="single-deal">
+										<div class="overlay"></div>
+										<img class="img-fluid w-100" src="{{$item->image}}" alt="" style="height: 191.48px;width:476.66px">
+										<a href="{{$item->image}}" class="img-pop-up" target="_blank">
+											<div class="deal-details">
+												<h6 class="deal-title">{{($item->title)}}</h6>
+											</div>
+										</a>
 									</div>
-								</a>
-							</div>
-						</div>
-						<div class="col-lg-8 col-md-8">
-							<div class="single-deal">
-								<div class="overlay"></div>
-								<img class="img-fluid w-100" src="{{asset('home')}}/img/category/c4.jpg" alt="">
-								<a href="{{asset('home')}}/img/category/c4.jpg" class="img-pop-up" target="_blank">
-									<div class="deal-details">
-										<h6 class="deal-title">Sneaker for Sports</h6>
-									</div>
-								</a>
-							</div>
-						</div>
+								</div>
+							@endforeach	
+						@endif
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="single-deal">
-						<div class="overlay"></div>
-						<img class="img-fluid w-100" src="{{asset('home')}}/img/category/c5.jpg" alt="">
-						<a href="{{asset('home')}}/img/category/c5.jpg" class="img-pop-up" target="_blank">
-							<div class="deal-details">
-								<h6 class="deal-title">Sneaker for Sports</h6>
+				@if(count($slideBlackFriday))
+					@foreach($slideBlackFriday as $item)
+						<div class="col-lg-4 col-md-6">
+							<div class="single-deal">
+								<div class="overlay"></div>
+								<img class="img-fluid w-100" src="{{$item->image}}" alt="" style="height: 431.19px;width:350px">
+								<a href="{{$item->image}}" class="img-pop-up" target="_blank">
+									<div class="deal-details">
+										<h6 class="deal-title">{{($item->title)}}</h6>
+									</div>
+								</a>
 							</div>
-						</a>
-					</div>
-				</div>
+						</div>
+					@endforeach	
+				@endif
 			</div>
 		</div>
 	</section>
@@ -176,10 +165,8 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>Latest Products</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<h1>Sản phẩm mới nhất</h1>
+							<p>Những mẫu giày được giới trẻ ưa thích hiện nay.</p>
 						</div>
 					</div>
 				</div>
@@ -188,7 +175,7 @@
 					<!-- single product -->
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
-							<img class="img-fluid" src="{{ $pro->image }}" alt="">
+							<img class="img-fluid" src="{{ $pro->image }}" alt="" style="width: 255px;height: 271.47px;">
 							<div class="product-details">
 								<h6><a href="{{ route('view',['slug'=>$pro->slug]) }}">{{ $pro->name }}</a></h6>
 
@@ -200,25 +187,14 @@
 									@else 
 										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
 									@endif
-									
+
 								<div class="prd-bottom">
 
 									<a href="{{ route('cart.add',['id'=>$pro->id]) }}" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
+										<p class="hover-text">thêm vào giỏ</p>
 									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
-									</a>
+
 								</div>
 							</div>
 						</div>
@@ -233,10 +209,8 @@
 				<div class="row justify-content-center">
 					<div class="col-lg-6 text-center">
 						<div class="section-title">
-							<h1>Coming Products</h1>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-								dolore
-								magna aliqua.</p>
+							<h1>Sản phẩm bán chạy</h1>
+							<p>Những mẫu giày được giới trẻ ưa thích hiện nay.</p>
 						</div>
 					</div>
 				</div>
@@ -245,7 +219,7 @@
 					<!-- single product -->
 					<div class="col-lg-3 col-md-6">
 						<div class="single-product">
-							<img class="img-fluid" src="{{ $pro->image }}" alt="">
+							<img class="img-fluid" src="{{ $pro->image }}" alt="" style="width: 255px;height: 271.47px;">
 							<div class="product-details">
 								<h6><a href="{{ route('view',['slug'=>$pro->slug]) }}">{{ $pro->name }}</a></h6>
 
@@ -262,19 +236,7 @@
 
 									<a href="{{ route('cart.add',['id'=>$pro->id]) }}" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">add to bag</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-heart"></span>
-										<p class="hover-text">Wishlist</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-sync"></span>
-										<p class="hover-text">compare</p>
-									</a>
-									<a href="" class="social-info">
-										<span class="lnr lnr-move"></span>
-										<p class="hover-text">view more</p>
+										<p class="hover-text">thêm vào giỏ</p>
 									</a>
 								</div>
 							</div>
@@ -294,35 +256,39 @@
 	<section class="exclusive-deal-area">
 		<div class="container-fluid">
 			<div class="row justify-content-center align-items-center">
-				<div class="col-lg-6 no-padding exclusive-left">
-					<div class="row clock_sec clockdiv" id="clockdiv">
-						<div class="col-lg-12">
-							<h1>Exclusive Hot Deal Ends Soon!</h1>
-							<p>Who are in extremely love with eco friendly system.</p>
-						</div>
-						<div class="col-lg-12">
-							<div class="row clock-wrap">
-								<div class="col clockinner1 clockinner">
-									<h1 class="days">150</h1>
-									<span class="smalltext">Days</span>
+				@if(count($slideCountdown))
+					@foreach($slideCountdown as $item)
+						<div class="col-lg-6 no-padding exclusive-left">
+							<div class="row clock_sec clockdiv" id="clockdiv">
+								<div class="col-lg-12">
+									<h1>{{ $item->title  }}</h1>
+									<p>{{ $item->descriptions }}</p>
 								</div>
-								<div class="col clockinner clockinner1">
-									<h1 class="hours">23</h1>
-									<span class="smalltext">Hours</span>
-								</div>
-								<div class="col clockinner clockinner1">
-									<h1 class="minutes">47</h1>
-									<span class="smalltext">Mins</span>
-								</div>
-								<div class="col clockinner clockinner1">
-									<h1 class="seconds">59</h1>
-									<span class="smalltext">Secs</span>
+								<div class="col-lg-12">
+									<div class="row clock-wrap">
+										<div class="col clockinner1 clockinner">
+											<h1 class="days">150</h1>
+											<span class="smalltext">Days</span>
+										</div>
+										<div class="col clockinner clockinner1">
+											<h1 class="hours">23</h1>
+											<span class="smalltext">Hours</span>
+										</div>
+										<div class="col clockinner clockinner1">
+											<h1 class="minutes">47</h1>
+											<span class="smalltext">Mins</span>
+										</div>
+										<div class="col clockinner clockinner1">
+											<h1 class="seconds">59</h1>
+											<span class="smalltext">Secs</span>
+										</div>
+									</div>
 								</div>
 							</div>
+							<a href="{{ route('about') }}" class="primary-btn">{{ $item->title_link}}</a>
 						</div>
-					</div>
-					<a href="{{ route('about') }}" class="primary-btn">Shop Now</a>
-				</div>
+					@endforeach	
+				@endif		
 				<div class="col-lg-6 no-padding exclusive-right">
 					<div class="active-exclusive-product-slider">
 						<!-- single exclusive carousel -->
@@ -342,7 +308,7 @@
 								<h4>{{ $pro->name }}</h4>
 								<div class="add-bag d-flex align-items-center justify-content-center">
 									<a class="add-btn" href="{{ route('cart.add',['id'=>$pro->id]) }}"><span class="ti-bag"></span></a>
-									<span class="add-text text-uppercase">Add to Bag</span>
+									<span class="add-text text-uppercase">Thêm vào giỏ</span>
 								</div>
 							</div>
 						</div>

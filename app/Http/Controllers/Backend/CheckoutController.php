@@ -9,6 +9,9 @@ use App\Models\Order;
 use App\Models\Order_item;
 use App\Helper\CartHelper;
 use App\Models\Login;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use App\User;
 
 class CheckoutController extends Controller
 {
@@ -18,9 +21,9 @@ class CheckoutController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $customer = Customer::orderBy('id', 'DESC')->get();
-        return view('checkout.list',compact('customer'));
+        return view('checkout.list', compact('customer'));
     }
 
     /**
@@ -37,64 +40,86 @@ class CheckoutController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param CartHelper $cart
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function store(CartHelper $cart, Request $request)
     {
+
+
         $this->validate($request, [
             'name' => 'required|max:255',
-            'phone' => 'required',
+            'phone' => 'required|digits_between:10,11',
             'email' => 'required|email',
-            'password'=>'required',
-            'address' => 'required',
             'payment' => 'required',
-            'note' => 'required',
 
         ], [
             'name.required' => 'Bạn chưa nhập Họ và tên',
             'name.max' => 'Họ và tên chỉ có thế dài tối da 255 kí tự',
             'phone.required' => 'Bạn chưa nhập số điện thoại',
+            'phone.digits_between' => 'Số điện thoại nằm trong khoảng 10 hoặc 11 chữ số',
             'email.required' => 'Bạn chưa nhập địa chỉ email',
             'email.email' => 'Email không đúng định dạng',
-            'password.required'=>'Mật khẩu không được để trống',
-            'address.required' => 'Bạn chưa nhập địa chỉ',
             'payment.required' => 'Bạn chưa chọn phương thức thanh toán',
-            'note.required' => 'Bạn chưa nhập ghi chú',
         ]);
+        if ($request->createAccount && $request->createAccount == 'on') {
+            $this->validate($request, [
+                'password' => 'required'
+            ], [
+                'password.required' => 'Mật khẩu không được để trống',
+            ]);
+        }
         $customer = Customer::create($request->all());
-
-        // $login = new Login();
-        // $login->customer_id = $request->customer_id;
-        // $login->username = $request->name;
-        // $login->password = $request->password;
-        // $login->save();
-
         $order = Order::create([
             'payment' => $request->payment,
             'total' => $cart->total_price,
             'note' => $request->note,
             'customer_id' => $customer->id,
             'status' => 0
-        ]); 
+        ]);
         foreach ($cart->items as $item) {
             Order_item::create([
                 'product_id' => $item['id'],
                 'order_id' => $order->id,
                 'quantity' => $item['quantity'],
                 'price' => $item['price'],
-                
+
             ]);
         }
         Session(['cart' => '']);
-        $buyer = Customer::where('id', $customer->id)->first();
-        $orders = $order::where('customer_id', $order->customer_id)->get();
-        // $logins = $login::where('id',$login->id)->first();
-        return redirect()->route('confirmation')->with([
-            'buyer' => $buyer,
-            'orders' => $orders,
-           
-        ]);
+//        $buyer = Customer::where('id', $customer->id)->first();
+//        $orders = $order::where('customer_id', $order->customer_id)->get();
+
+        //Nếu có tài khoản thì
+        if ($request->createAccount == "on") {
+            $rule2 = [
+                'password' => 'required',
+                'email' => 'unique:users'
+            ];
+            $validator2 = Validator::make(Input::all(), $rule2);
+            if ($validator2->fails()) {
+                return redirect('checkout/create')
+                    ->withErrors(['password.required' => 'Bạn chưa nhập password', 'email.unique' => 'Email đã tồn tại trong hệ thống'])
+                    ->withInput();
+            }
+
+            $user = new User();
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone = $request->phone;
+            $user->address = $request->address;
+            $user->avartar = null;
+            $user->role = 0;
+            $user->remember_token = null;
+            $user->password = bcrypt($request->password);
+            $user->save();
+        }
+
+        return redirect()->route('confirmation');
+
+
     }
 
     /**

@@ -5,11 +5,11 @@
 		<div class="container">
 			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
 				<div class="col-first">
-					<h1>Product Details Page</h1>
+					<h1>Chi tiết sản phẩm</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-						<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
-						<a href="single-product.html">Product-Details</a>
+						<a href="{{route('home')}}">Trang chủ<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{{route('about')}}">Cửa hàng<span class="lnr lnr-arrow-right"></span></a>
+						<a href="#">Chi tiết sản phẩm</a>
 					</nav>
 				</div>
 			</div>
@@ -26,12 +26,11 @@
 						<div class="single-prd-item">
 							<img class="img-fluid" src="{{ $product->image }}" alt="">
 						</div>
+						@foreach($product_images as $item)
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ $product->imgDetails }}" alt="">
+							<img class="img-fluid" src="{{ $item->image }}" alt="">
 						</div>
-						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ $product->imgDetails }}" alt="">
-						</div>
+						@endforeach
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">

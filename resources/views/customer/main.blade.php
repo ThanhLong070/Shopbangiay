@@ -50,22 +50,22 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-							<li class="nav-item"><a href="{{route('about')}}" class="nav-link ">Shop</a></li>
+							<li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Trang chủ</a></li>
+							<li class="nav-item"><a href="{{route('about')}}" class="nav-link ">Cửa hàng</a></li>
 							{{-- <li class="nav-item"><a class="nav-link" href="{{route('tracking')}}">Tracking</a></li> --}}
-							<li class="nav-item"><a class="nav-link" href="{{route('getContactUs')}}">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('getContactUs')}}">Liên hệ</a></li>
 
 							@if(Auth::check())
 								<li class="nav-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()->name}}</a></li>
 								@if(Auth::user()->role ==1 )
 										<li class="nav-item"><a class="nav-link" href="{{route('backend')}}"> Quản trị</a></li>
-										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Đăng xuất</a></li>
 								@else
-										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Đăng xuất</a></li>
 								@endif
 							@else
-							<li class="nav-item"><a class="nav-link" href="{{route('login')}}">Login</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{route('register')}}">Register</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('login')}}">Đăng nhập</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('register')}}">Đăng kí</a></li>
 							@endif
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -101,58 +101,61 @@
 
 	<!-- Start related-product Area -->
 	<section class="related-product-area section_gap_bottom">
-		<div class="container">
-			<div class="row justify-content-center">
-				<div class="col-lg-6 text-center">
-					<div class="section-title">
-						<h1>Ưu đãi trong tuần</h1>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-						magna aliqua.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-9">
-					<div class="row">
-						
-						@if($mainProducts)
-
-						@foreach($mainProducts as $pro)
-						<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
-							<div class="single-related-product d-flex">
-								<a href="#"><img src="{{ $pro->image }}" alt="" style="width: 70px;height: auto;"></a>
-								<div class="desc">
-									<a href="{{ route('view',['slug'=>$pro->slug]) }}" class="title">{{ $pro->name }}</a>
-
-									@if($pro->sale_price > 0)
-									<div class="price">
-										<h6>{{ number_format($pro->sale_price) }} VNĐ</h6>
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
-									</div>
-									@else 
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
-									@endif
-								</div>
-								
+		@if(count($slideBlackFriday))
+			@foreach($slideBlackFriday as $item)
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-6 text-center">
+							<div class="section-title">
+								<h1>{{ $item->title}}</h1>
+								<p>{{ $item->descriptions }}</p>
 							</div>
 						</div>
-						@endforeach
-						@else 
-						<h3>Không có sản phẩm nào</h3>
-						@endif
+					</div>
+					<div class="row">
+						<div class="col-lg-9">
+							<div class="row">
+								
+								@if($mainProducts)
+
+								@foreach($mainProducts as $pro)
+								<div class="col-lg-4 col-md-4 col-sm-6 mb-20">
+									<div class="single-related-product d-flex">
+										<a href="#"><img src="{{ $pro->image }}" alt="" style="width: 70px;height: auto;"></a>
+										<div class="desc">
+											<a href="{{ route('view',['slug'=>$pro->slug]) }}" class="title">{{ $pro->name }}</a>
+
+											@if($pro->sale_price > 0)
+											<div class="price">
+												<h6>{{ number_format($pro->sale_price) }} VNĐ</h6>
+												<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+											</div>
+											@else 
+												<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+											@endif
+										</div>
+										
+									</div>
+								</div>
+								@endforeach
+								@else 
+								<h3>Không có sản phẩm nào</h3>
+								@endif
 
 
+							</div>
+						</div>
+						<div class="col-lg-3">
+							<div class="ctg-right">
+								<a href="#" target="_blank">
+									<img class="img-fluid d-block mx-auto" src="{{ $item->image }}" alt="" style="width: 255px;height: 301.03px;">
+								</a>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="col-lg-3">
-					<div class="ctg-right">
-						<a href="#" target="_blank">
-							<img class="img-fluid d-block mx-auto" src="{{asset('home')}}/img/category/c5.jpg" alt="">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
+			@endforeach	
+		@endif
 	</section>
 	<!-- End related-product Area -->
 
@@ -164,8 +167,9 @@
 					<div class="single-footer-widget">
 						<h6>About Us</h6>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
+							Số điện thoại: {{$siteSettings['phone']}}. <br>
+							Email: {{$siteSettings['email']}}. <br>
+							Địa chỉ: {{$siteSettings['address']}}.
 						</p>
 					</div>
 				</div>
@@ -253,6 +257,7 @@
 			<script src="{{asset('home')}}/js/main.js"></script>
 			<script src="{{asset('home')}}/js/myScript.js"></script>
 
+	
 		</body>
 
 		</html>

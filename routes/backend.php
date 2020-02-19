@@ -5,6 +5,8 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'Ch
   Route::get('/','BackendControllers@admin')->name('backend');
   Route::get('/order','BackendControllers@order')->name('order');
   Route::get('/order_items','BackendControllers@order_items')->name('order_items');
+  Route::get('/option','OptionController@index')->name('option.index');
+  Route::post('/option','OptionController@update')->name('option.update');
   // Route::get('/login','BackendControllers@login')->name('login');
   // Route::post('/login','BackendControllers@post_login')->name('admin');
   // Route::get('/logout','BackendControllers@logout')->name('logout');
@@ -12,6 +14,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'Ch
     'category' => 'CategoryController',
     'product' => 'ProductController',
     'user' => 'UserController',
+    'slide' => 'SlideController',
   ]);
 });
  Route::resources([

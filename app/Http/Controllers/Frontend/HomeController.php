@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Slide;
 use Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
@@ -21,7 +22,13 @@ class HomeController extends Controller
 
         function index(){
             $products= Product::limit(8)->orderBy('name','DESC')->get();
-            return view('home/index',compact('products'));
+            $slides = Slide::take(3)->where('status', 1)->where('type', 0)->get();
+            $slideHinhLonTren = Slide::take(1)->where('status', 1)->where('type', 1)->get();
+            $slide2HinhNho = Slide::take(2)->where('status', 1)->where('type', 2)->get();
+            $slideHinhLonDuoi = Slide::take(1)->where('status', 1)->where('type', 3)->get();
+            $slideBlackFriday = Slide::take(1)->where('status', 1)->where('type', 4)->get();
+            $slideCountdown = Slide::take(1)->where('status', 1)->where('type', 5)->get();
+            return view('home/index',compact('products','slides','slideHinhLonTren','slide2HinhNho','slideHinhLonDuoi','slideBlackFriday','slideCountdown'));
         }
 
         function about(){
@@ -34,18 +41,18 @@ class HomeController extends Controller
             return view('home/product');
         }
 
-        // function checkout(){
-        //     return view('home/checkout');
-        // }
+         function checkout(){
+             return view('home/checkout');
+         }
 
         function cart(){
             return view('home/cart');
         }
 
         function confirmation(){
-            $user = Auth::user();
-            $orders=Customer::where('id',$user->id)->first();
-            return view('home/confirmation',compact('orders'));
+
+            return view('home/confirmation');
+
         }
 
         function login(){
@@ -64,8 +71,8 @@ class HomeController extends Controller
          function View($slug){
             $category=Category::where('slug',$slug)->first();
             $product=Product::where('slug',$slug)->first();
-
-            return view('home/product',['product'=>$product,'category'=>$category]);
+            $slideBlackFriday = Slide::take(1)->where('status', 1)->where('type', 4)->get();
+            return view('home/product',['product'=>$product,'category'=>$category,'slideBlackFriday'=>$slideBlackFriday]);
 
         }
 

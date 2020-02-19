@@ -50,22 +50,22 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Home</a></li>
-							<li class="nav-item"><a href="{{route('about')}}" class="nav-link ">Shop</a></li>
+							<li class="nav-item active"><a class="nav-link" href="{{route('home')}}">Trang chủ</a></li>
+							<li class="nav-item"><a href="{{route('about')}}" class="nav-link ">Cửa hàng</a></li>
 							{{-- <li class="nav-item"><a class="nav-link" href="{{route('tracking')}}">Tracking</a></li> --}}
-							<li class="nav-item"><a class="nav-link" href="{{route('getContactUs')}}">Contact</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('getContactUs')}}">liên hệ</a></li>
 							
 							@if(Auth::check())
 								<li class="nav-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-user" aria-hidden="true"></i> {{Auth::user()->name}}</a></li>
 								@if(Auth::user()->role ==1 )
 										<li class="nav-item"><a class="nav-link" href="{{route('backend')}}"> Quản trị</a></li>
-										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Đăng xuất</a></li>
 								@else
-										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Logout</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{url('logout')}}">Đăng xuất</a></li>
 								@endif
 							@else
-							<li class="nav-item"><a class="nav-link" href="{{route('login')}}">Login</a></li>
-							<li class="nav-item"><a class="nav-link" href="{{route('register')}}">Register</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('login')}}">Đăng nhập</a></li>
+							<li class="nav-item"><a class="nav-link" href="{{route('register')}}">Đăng kí</a></li>
 							@endif
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
@@ -105,8 +105,9 @@
 					<div class="single-footer-widget">
 						<h6>About Us</h6>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore dolore
-							magna aliqua.
+							Số điện thoại: {{$siteSettings['phone']}}. <br>
+							Email: {{$siteSettings['email']}}. <br>
+							Địa chỉ: {{$siteSettings['address']}}.
 						</p>
 					</div>
 				</div>
@@ -192,6 +193,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
 	<script src="{{asset('home')}}/js/gmaps.min.js"></script>
 	<script src="{{asset('home')}}/js/main.js"></script>
+
+	@yield('script')
+	
 </body>
 
 </html>
