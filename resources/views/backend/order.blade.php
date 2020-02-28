@@ -42,9 +42,24 @@
           echo "null";
           ?>
         </td>
-        <td>{{ number_format($od->total) }} VNĐ</td>
+        <td>{{ number_format($od->total,0,'.',' ') }} VNĐ</td>
         <td>{{ $od->note }}</td>
-        <td>{{ $od->status }}</td>
+        <td>
+              @if($od->status == 0)
+                <a data-id="{{$od->id}}" class="update btn btn-success"
+                   href="javascript:void(0)"
+                   data-toggle="tooltip" title="Đã hoàn thành!"><i
+                          class="fas fa-feather-alt"></i>
+                </a>
+              @endif
+              <a href="{{route('order.edit',$od->id)}}" data-toggle="tooltip"
+                 title="Chi tiết đơn hàng" class="btn btn-info"> <i class="fas fa-eye"></i>
+              </a>
+              <a data-id="{{$od->id}}" class="delete btn btn-danger"
+                 href="javascript:void(0)"><i
+                        class="fas fa-trash-alt"></i>
+              </a>
+        </td>
         <td>{{ $od->payment }}</td>
       </tr>
       @endforeach

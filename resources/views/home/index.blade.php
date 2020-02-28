@@ -181,18 +181,18 @@
 
 								@if($pro->sale_price > 0)
 									<div class="price">
-										<h6>{{ number_format($pro->sale_price) }} VNĐ</h6>
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6>{{ number_format($pro->sale_price,0,'.',' ') }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									</div>
 									@else 
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									@endif
 
 								<div class="prd-bottom">
 
 									<a href="{{ route('cart.add',['id'=>$pro->id]) }}" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">thêm vào giỏ</p>
+										<p class="hover-text">add to bag</p>
 									</a>
 
 								</div>
@@ -225,18 +225,18 @@
 
 								@if($pro->sale_price > 0)
 									<div class="price">
-										<h6>{{ number_format($pro->sale_price) }} VNĐ</h6>
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6>{{ number_format($pro->sale_price,0,'.',' ') }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									</div>
 									@else 
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									@endif
 
 								<div class="prd-bottom">
 
 									<a href="{{ route('cart.add',['id'=>$pro->id]) }}" class="social-info">
 										<span class="ti-bag"></span>
-										<p class="hover-text">thêm vào giỏ</p>
+										<p class="hover-text">add to bag</p>
 									</a>
 								</div>
 							</div>
@@ -298,11 +298,11 @@
 							<div class="product-details">
 								@if($pro->sale_price > 0)
 									<div class="price">
-										<h6>{{ number_format($pro->sale_price) }} VNĐ</h6>
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6>{{ number_format($pro->sale_price,0,'.',' ') }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									</div>
 									@else 
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									@endif
 
 								<h4>{{ $pro->name }}</h4>

@@ -25,7 +25,11 @@ class Product extends Model
     	'cat_id','name','description','image','price'
     ];
 
-   public function orm_category(){
+    public function product_img(){
+        return $this->hasMany('App\Models\Product_images','product_id','id');
+    }
+
+    public function orm_category(){
        return $this->belongsTo(Category::class,'cat_id','id');
    }
 }

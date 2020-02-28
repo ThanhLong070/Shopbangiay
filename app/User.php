@@ -6,6 +6,16 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @property mixed name
+ * @property mixed email
+ * @property mixed phone
+ * @property mixed address
+ * @property null avartar
+ * @property string password
+ * @property int role
+ * @property null remember_token
+ */
 class User extends Authenticatable
 {
     use Notifiable;

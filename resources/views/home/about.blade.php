@@ -62,11 +62,11 @@
 
 									@if($pro->sale_price > 0)
 									<div class="price">
-										<h6>{{ number_format($pro->sale_price) }} VNĐ</h6>
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6>{{ number_format($pro->sale_price,0,'.',' ') }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									</div>
 									@else 
-										<h6 class="l-through">{{ number_format($pro->price) }} VNĐ</h6>
+										<h6 class="l-through">{{ number_format($pro->price,0,'.',' ') }} VNĐ</h6>
 									@endif
 
 									<div class="prd-bottom">

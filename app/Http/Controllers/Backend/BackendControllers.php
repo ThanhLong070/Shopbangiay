@@ -21,16 +21,16 @@ class BackendControllers extends Controller
             return view('backend/admin',compact('product_count','order_count','cus_count'));
     }
      
-    function order()
-    {
-        // $orders = Order::orderBy('id', 'DESC')->get();
-        return view('backend/order');
-    }
-      function order_items()
-    {
-        // $orders = Order::orderBy('id', 'DESC')->get();
-        return view('backend/order_items');
-    }
+//    function order()
+//    {
+//        // $orders = Order::orderBy('id', 'DESC')->get();
+//        return view('backend/order');
+//    }
+//      function order_items()
+//    {
+//        // $orders = Order::orderBy('id', 'DESC')->get();
+//        return view('backend/order_items');
+//    }
 
     // function login()
 

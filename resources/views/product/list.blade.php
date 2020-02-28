@@ -58,11 +58,14 @@
             <td>{{number_format($product->sale_price),0,",","."}} VNĐ</td>
             <td>
                 <a href="{{route('product.edit',$product->id)}}" class="btn btn-primary"><i class="fas fa-feather-alt"></i></a>
-                <form action="{{route('product.destroy', $product->id)}}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button onclick="return confirm('Bạn có chắc không?')" class="btn btn-danger" href="{{route('product.destroy', $product->id)}}"><i class="fas fa-trash-alt"></i></button>
-                </form>
+                {{--<form action="{{route('product.destroy', $product->id)}}" method="POST" style="display: inline;">--}}
+                    {{--@csrf--}}
+                    {{--@method('DELETE')--}}
+                    {{--<button onclick="return confirm('Bạn có chắc không?')" class="btn btn-danger" href="{{route('product.destroy', $product->id)}}"><i class="fas fa-trash-alt"></i></button>--}}
+                {{--</form>--}}
+                <a data-id="{{$product->id}}" class="delete btn btn-danger"
+                   href="javascript:void(0)"><i class="fas fa-trash-alt"></i>
+                </a>
             </td>
         </tr>
         @endforeach
@@ -75,4 +78,38 @@
 <!-- /.table-responsive -->
 </div>
 </div>
+@stop
+
+@section('script')
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function () {
+            $(document).on('click', '.delete', function () {
+                if (confirm('Bạn có chắc muốn xóa?')) {
+                    var id = $(this).attr('data-id');
+                    var url = '{!! route('product.ajax')!!}';
+                    $.ajax({
+                        url: url,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {id: id, action: 'delete'}
+                    })
+                        .done(function (data) {
+                            if (data == true) {
+                                $('#data-table').load(window.location.href + " #data-table>tbody");
+                            }
+                            else
+                                alert('no');
+
+                        });
+
+                }
+            });
+        });
+    </script>
+
 @stop

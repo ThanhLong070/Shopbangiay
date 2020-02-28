@@ -12,7 +12,7 @@ class CartController extends Controller
 
 
     public function add(CartHelper $cart,$id){
-    	$product = Product::find($id);
+    	$product = Product::findOrFail($id);
     	$cart->add($product);
         return redirect()->back();
     }  

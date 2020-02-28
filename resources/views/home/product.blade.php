@@ -24,38 +24,42 @@
 				<div class="col-lg-6">
 					<div class="s_Product_carousel">
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ $product->image }}" alt="">
+							<img class="img-fluid" src="{{ $product->image }}" alt="" style="width: 540px;height: 583.781px;">
 						</div>
-						@foreach($product_images as $item)
+						@if($product->product_img)
+						@foreach($product->product_img as $item)
 						<div class="single-prd-item">
-							<img class="img-fluid" src="{{ $item->image }}" alt="">
+							<img class="img-fluid" src="{{ $item->image }}" alt="" style="width: 540px;height: 583.781px;">
 						</div>
 						@endforeach
+						@else
+							<h3>Không có ảnh nào</h3>
+						@endif
 					</div>
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
 						<h3>{{ $product->name }}</h3>
 						@if($product->sale_price>0)
-						<h2>{{ number_format($product->price) }} VNĐ <span>->sale:{{ number_format($product->sale_price) }} VNĐ
+						<h2>{{ number_format($product->price,0,',',' ') }} VNĐ <span>->sale:{{ number_format($product->sale_price,0,',',' ') }} VNĐ
 						</span></h2>
 						@else
-							<h2>{{ number_format($product->price) }} VNĐ</h2>
+							<h2>{{ number_format($product->price,0,',',' ') }} VNĐ</h2>
 						@endif
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : {{ $product->orm_category->name }}</a></li>
+							<li><a class="active" href="#"><span>Danh mục</span> : {{ $product->orm_category->name }}</a></li>
 						</ul>
-						<p>{!!$product->description!!}</p>
-						{{-- <div class="product_count">
-							<label for="qty">Quantity:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div> --}}
+						<span>{!!$product->description!!}</span>
+						 {{--<div class="product_count">--}}
+							{{--<label for="qty">Quantity:</label>--}}
+							{{--<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">--}}
+							{{--<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"--}}
+							 {{--class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>--}}
+							{{--<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"--}}
+							 {{--class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>--}}
+						{{--</div>--}}
 						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="{{ route('cart.add',['id'=>$product->id]) }}">Add to Cart</a>
+							<a class="primary-btn" href="{{ route('cart.add',['id'=>$product->id]) }}">Thêm vào giỏ</a>
 						{{-- 	<a class="icon_btn" href="#"><i class="lnr lnr lnr-diamond"></i></a>
 							<a class="icon_btn" href="#"><i class="lnr lnr lnr-heart"></i></a> --}}
 						</div>

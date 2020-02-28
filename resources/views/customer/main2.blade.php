@@ -71,7 +71,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="nav-item"><a href="{{route('cart')}}" class="cart" style="color: black"><span class="ti-bag"></span>(
 								{{ $cart->total_quantity }} -
-								{{ number_format($cart->total_price)}}VNĐ
+								{{ number_format($cart->total_price,0,'.',' ')}}VNĐ
 							)</a></li>
 							<li class="nav-item">
 								<button class="search"><span class="lnr lnr-magnifier" id="search"></span></button>
@@ -103,7 +103,7 @@
 			<div class="row">
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>About Us</h6>
+						<h6>Thông tin về chúng tôi</h6>
 						<p>
 							Số điện thoại: {{$siteSettings['phone']}}. <br>
 							Email: {{$siteSettings['email']}}. <br>
@@ -113,8 +113,8 @@
 				</div>
 				<div class="col-lg-4  col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Newsletter</h6>
-						<p>Stay update with our latest</p>
+						<h6>Bản tin</h6>
+						<p>Luôn cập nhật với bản mới nhất của chúng tôi</p>
 						<div class="" id="mc_embed_signup">
 
 							<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
@@ -122,7 +122,7 @@
 
 								<div class="d-flex flex-row">
 
-									<input class="form-control" name="EMAIL" placeholder="Enter Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email '"
+									<input class="form-control" name="EMAIL" placeholder="Nhập địa chỉ Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nhập địa chỉ Email '"
 									 required="" type="email">
 
 
@@ -142,7 +142,7 @@
 				</div>
 				<div class="col-lg-3  col-md-6 col-sm-6">
 					<div class="single-footer-widget mail-chimp">
-						<h6 class="mb-20">Instragram Feed</h6>
+						<h6 class="mb-20">Nguồn cấp dữ liệu</h6>
 						<ul class="instafeed d-flex flex-wrap">
 							<li><img src="{{asset('home')}}/img/i1.jpg" alt=""></li>
 							<li><img src="{{asset('home')}}/img/i2.jpg" alt=""></li>
@@ -157,20 +157,20 @@
 				</div>
 				<div class="col-lg-2 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
-						<h6>Follow Us</h6>
-						<p>Let us be social</p>
+						<h6>Theo dõi chúng tôi trên</h6>
+						<p>Mạng xã hội</p>
 						<div class="footer-social d-flex align-items-center">
-							<a href="#"><i class="fa fa-facebook"></i></a>
-							<a href="#"><i class="fa fa-twitter"></i></a>
-							<a href="#"><i class="fa fa-dribbble"></i></a>
-							<a href="#"><i class="fa fa-behance"></i></a>
+							<a href="https://www.facebook.com/BachkhoaAptech236HoangQuocViet"><i class="fa fa-facebook"></i></a>
+							<a href="https://www.facebook.com/BachkhoaAptech236HoangQuocViet"><i class="fa fa-twitter"></i></a>
+							<a href="https://www.facebook.com/BachkhoaAptech236HoangQuocViet"><i class="fa fa-dribbble"></i></a>
+							<a href="https://www.facebook.com/BachkhoaAptech236HoangQuocViet"><i class="fa fa-behance"></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="footer-bottom d-flex justify-content-center align-items-center flex-wrap">
 				<p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+Bản quyền &copy;<script>document.write(new Date().getFullYear());</script> Tất cả các quyền | Mẫu này được tạo <i class="fa fa-heart-o" aria-hidden="true"></i> bởi <a href="https://colorlib.com" target="_blank">Colorlib</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 </p>
 			</div>

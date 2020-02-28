@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Order;
-use App\Models\Order_item;
 use App\Helper\CartHelper;
 use App\Models\Login;
 use Illuminate\Support\Facades\Validator;
@@ -71,6 +71,7 @@ class CheckoutController extends Controller
                 'password.required' => 'Mật khẩu không được để trống',
             ]);
         }
+
         $customer = Customer::create($request->all());
         $order = Order::create([
             'payment' => $request->payment,
@@ -80,13 +81,20 @@ class CheckoutController extends Controller
             'status' => 0
         ]);
         foreach ($cart->items as $item) {
-            Order_item::create([
-                'product_id' => $item['id'],
-                'order_id' => $order->id,
-                'quantity' => $item['quantity'],
-                'price' => $item['price'],
 
-            ]);
+            $test = new OrderDetail();
+            $test->product_id = $item['id'];
+            $test->order_id = $order->id;
+            $test->quantity = $item['quantity'];
+            $test->price = $item['price'];
+            $test->save();
+//            OrderDetail::create([
+//                'product_id' => $item['id'],
+//                'order_id' => $order->id,
+//                'quantity' => $item['quantity'],
+//                'price' => $item['price'],
+//
+//            ]);
         }
         Session(['cart' => '']);
 //        $buyer = Customer::where('id', $customer->id)->first();

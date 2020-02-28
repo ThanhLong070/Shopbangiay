@@ -103,10 +103,26 @@
                                    echo "null";
                             ?>
                           </td>
-                          <td>{{ number_format($od->total) }} VNĐ</td>
+                          <td>{{ number_format($od->total,0,'.',' ') }} VNĐ</td>
                           <td>{{ $od->note }}</td>
-                          <td>{{ $od->status }}</td>
-                          <td>{{ $od->payment }}</td>
+                          <td>
+                              @if($od->status==0)
+                                  Chưa xử lý
+                              @elseif($od->status==1)
+                                  Đang giao hàng
+                              @elseif($od->status==2)
+                                  Đã hoàn thành
+                              @elseif($od->status==3)
+                                  Đã hủy
+                              @endif
+                          </td>
+                          <td>
+                              @if($od->payment=="credit")
+                                  Chuyển khoản
+                              @else
+                                  Ship cod
+                              @endif
+                          </td>
                         </tr>
                     @endforeach
                     </tbody>

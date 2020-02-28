@@ -33,3 +33,4 @@
 </script>
 
 <script src="{{asset('backend')}}/dist/js/func_ckfinder.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">

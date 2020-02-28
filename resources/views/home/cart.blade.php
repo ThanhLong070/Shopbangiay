@@ -78,11 +78,11 @@
                                     {{-- <a href="{{ route('cart.update',['id'=>$item['id']]) }}" class="btn btn-xs btn-success">Cập nhật</a> --}}
                                 </td>
                                 <td>
-                                    <h5>{{ number_format($item['price']) }}VNĐ</h5>
+                                    <h5>{{ number_format($item['price'],0,'.',' ') }}VNĐ</h5>
                                 </td>
 
                                 <td>
-                                    <h5>{{ number_format($thanhtien) }}VNĐ</h5>
+                                    <h5>{{ number_format($thanhtien,0,'.',' ') }}VNĐ</h5>
                                 </td>
                                 <td>
                                     <a href="{{ route('cart.remove',['id'=>$item['id']]) }}" class="genric-btn danger radius" onclick="return confirm('Bạn có muốn xóa sản phẩm này không ?')">Xóa</a>
@@ -90,13 +90,13 @@
                                 <?php $n++;?>
                             </tr>
                             @endforeach
-                       
+
 
                         </tbody>
                         
                             <tr>
                                 <td colspan="7" style="text-align: center;">
-                                    <h3>Tổng tiền: <span>{{ number_format($cart->total_price) }}VNĐ</span></h3>
+                                    <h3>Tổng tiền: <span>{{ number_format($cart->total_price,0,'.',' ') }}VNĐ</span></h3>
                                 </td>
                             </tr>
                        

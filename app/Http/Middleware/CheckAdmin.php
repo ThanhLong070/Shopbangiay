@@ -16,6 +16,7 @@ class CheckAdmin
      */
     public function handle($request, Closure $next)
     {
+
         if (Auth::check()) {
             if (Auth::user()->role == 1) {
                 return $next($request);

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Product_images;
 use App\Models\Slide;
 use Auth;
 use Illuminate\Support\Facades\Mail;

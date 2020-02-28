@@ -29,7 +29,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                     @foreach($order_items as $od)
+                     @foreach($orderDetails as $od)
  
                           <td>{{ $od->id }}</td>
                           <td>{{ $od->order_id }}</td>
@@ -43,9 +43,9 @@
                                    echo "null";
                             ?>
                           </td>
-                          <td>{{ number_format($od->quantity) }}</td>
-                          <td>{{ number_format($od->price) }} VNĐ</td>
-                          <td>{{ number_format($od->sale_price) }} VNĐ</td>
+                          <td>{{ number_format($od->quantity,0,'.',' ') }}</td>
+                          <td>{{ number_format($od->price,0,'.',' ') }} VNĐ</td>
+                          <td>{{ number_format($od->sale_price,0,'.',' ') }} VNĐ</td>
                         </tr>
                     @endforeach
                     </tbody>

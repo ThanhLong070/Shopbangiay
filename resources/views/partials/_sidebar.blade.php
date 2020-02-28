@@ -119,7 +119,7 @@
         </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item has-treeview">
-                <a href="{{route('order')}}" class="nav-link">
+                <a href="{{route('order.index')}}" class="nav-link">
                     <i class="nav-icon fas fa-table"></i>
                     <p>
                          Danh sách đơn hàng
@@ -128,17 +128,7 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item has-treeview">
-                <a href="{{route('order_items')}}" class="nav-link">
-                    <i class="nav-icon fas fa-table"></i>
-                    <p>
-                         Danh sách  chi tiết đơn hàng
 
-                    </p>
-                </a>
-            </li>
-        </ul>
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item has-treeview">
                 <a href="{{route('checkout.store')}}" class="nav-link">

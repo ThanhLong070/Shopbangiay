@@ -73,8 +73,8 @@ if (Auth::check()) {
                         <div class="col-md-12 form-group p_star">
                             <select class="country_select" style="display: none;" name="payment" value='{{ old('payment') }}'>
                                 <option value="1">Phương thức thanh toán</option>
-                                <option value="Kiểm tra hàng rồi thanh toán">Kiểm tra hàng rồi thanh toán</option>
-                                <option value="Thanh toán trực tuyến">Thanh toán trực tuyến</option>
+                                <option value="cash">Ship CoD</option>
+                                <option value="credit">Chuyển Khoản</option>
                             </select>
                         </div>
                         @if($errors->has('payment'))
@@ -110,12 +110,13 @@ if (Auth::check()) {
                                     @endphp
 
                                     <li>
-                                        <a href="#">{{ $item['name'] }} <span class="middle">x 0{{ $item['quantity'] }}</span><span class="last">{{ number_format($thanhtien) }}VNĐ</span></a></li>
+                                        <a href="#">{{ $item['name'] }} <span class="middle">x 0{{ $item['quantity'] }}</span><span class="last">{{ number_format($thanhtien,0,'.',' '
+                                        ) }}VNĐ</span></a></li>
 
                                         @endforeach
                                     </ul>
                                     <ul class="list list_2">
-                                        <li><a href="#">Tổng cộng <span>{{ number_format($cart->total_price) }}VNĐ</span></a></li>
+                                        <li><a href="#">Tổng cộng <span>{{ number_format($cart->total_price,0,'.',' ') }}VNĐ</span></a></li>
                                     </ul>
                                 </div>
                             </div>
