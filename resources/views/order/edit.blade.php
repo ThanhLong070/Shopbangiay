@@ -59,7 +59,7 @@
                             Việt Nam
                         </address>
 
-                        {{$order->customer->phone}}<br/>
+                        0{{$order->customer->phone}}<br/>
                         {{$order->customer->email}}
                     </div>
                 </div>
@@ -153,9 +153,6 @@
                 </form>
             </div>
         </div>
-
-        <button class="btn btn-light btn--action btn--fixed " data-sa-action="print"><i class="zmdi zmdi-print"></i>
-        </button>
     </div>
 
 @stop

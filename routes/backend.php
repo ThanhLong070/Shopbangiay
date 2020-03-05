@@ -22,14 +22,14 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'admin', 'middleware' => 'Ch
 //  ]);
 
     Route::post('product-ajax', 'ProductController@ajax')->name('product.ajax');
-
+    Route::post('user-ajax', 'UserController@ajax')->name('user.ajax');
     Route::post('order-ajax', 'OrderController@ajax')->name('order.ajax');
     Route::get('order', 'OrderController@getIndex')->name('order.index');
     Route::get('order/edit/{id}', 'OrderController@edit')->name('order.edit');
     Route::post('order/update/{id}', 'OrderController@update')->name('order.update');
     Route::post('order/report', 'OrderController@dataReport')->name('filterReport');
     Route::get('order/chua-xu-ly', 'OrderController@chuaXuLy')->name('chuaXuLy');
-
+    Route::post('brand-ajax', 'BrandController@ajax')->name('brand.ajax');
 });
  Route::resources([
     'checkout' =>'Backend\CheckoutController',

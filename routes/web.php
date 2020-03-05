@@ -27,3 +27,4 @@ Route::resource("product", "Backend\ProductController");
 Route::resource("user", "Backend\UserController");
 Route::resource("slide", "Backend\SlideController");
 Route::resource("checkout", "Backend\CheckoutController");
+Route::resource("brand", "Backend\BrandController");

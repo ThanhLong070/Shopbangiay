@@ -15,14 +15,16 @@ class ProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('cat_id');
-            $table->foreign('cat_id')->references('id')->on('categories');
+            $table->bigInteger('cat_id');
+            $table->bigInteger('brand_id');
             $table->char('name', 100);
             $table->string('slug')->unique();
             $table->longText('description');
             $table->string('image', 255);
             $table->integer('price');
             $table->integer('sale_price');
+            $table->tinyInteger('status')->default(1);
+            $table->integer('number');
             $table->timestamps();
         });
     }

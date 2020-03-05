@@ -294,7 +294,7 @@
 						<!-- single exclusive carousel -->
 						@foreach($products as $pro)
 						<div class="single-exclusive-slider">
-							<img class="img-fluid" src="{{ $pro->image }}" alt="">
+							<img class="img-fluid" src="{{ $pro->image }}" alt="" style="width: 492px;height: 447.27px;">
 							<div class="product-details">
 								@if($pro->sale_price > 0)
 									<div class="price">
@@ -324,21 +324,13 @@
 	<section class="brand-area section_gap">
 		<div class="container">
 			<div class="row">
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="{{asset('home')}}/img/brand/1.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="{{asset('home')}}/img/brand/2.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="{{asset('home')}}/img/brand/3.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="{{asset('home')}}/img/brand/4.png" alt="">
-				</a>
-				<a class="col single-img" href="#">
-					<img class="img-fluid d-block mx-auto" src="{{asset('home')}}/img/brand/5.png" alt="">
-				</a>
+                @if(count($listBrands)>0)
+                    @foreach($listBrands as $listBrand)
+                        <a class="col single-img" href="{{route('getBrand',$listBrand->id)}}">
+                            <img class="img-fluid d-block mx-auto" src="{{$listBrand->logo}}" alt="">
+                        </a>
+                    @endforeach
+                @endif
 			</div>
 		</div>
 	</section>

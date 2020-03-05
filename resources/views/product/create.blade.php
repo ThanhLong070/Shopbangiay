@@ -25,7 +25,17 @@
                     {{ $errors->first('name') }}
                 @endif
                 <div class="form-group">
-                    <label for="categorySelect">Chọn hãng:</label>
+                    <label for="categorySelect">Chọn thương hiệu:</label>
+                    <select class="form-control" name="brand_id">
+                        <option value="" selected>Chọn thương hiệu</option>
+                        <?php showCategories($listBrand,0,"•",old('brand_id'))?>
+                    </select>
+                </div>
+                 @if($errors->has('brand'))
+                    {{ $errors->first('brand') }}
+                @endif
+                <div class="form-group">
+                    <label for="categorySelect">Chọn danh mục:</label>
                     <select class="form-control" name="brand">
                         <option value="" selected>Chọn danh mục</option>
                         <?php showCategories($category,0,"•",old('brand'))?>
@@ -69,11 +79,22 @@
                                 </a>
                             </span>
                             <input id="thumbnail{{$lfm}}" class="form-control " type="text"
-                            name="imageDetail[]">
+                            name="product_img[]">
                         </div>
                         <img id="holder{{$lfm}}" style="margin-top:15px;max-height:100px;">
                     </div>
                     @endfor
+                    <div class="form-group">
+                        <label for="sale_price">Hiển thị sản phẩm:</label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" class="toggle-switch__checkbox" checked="" name="status"><i class="toggle-switch__helper"></i>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sale_price">Số lượng:</label>
+                        <input type="number" class="form-control" placeholder="Số lượng sản phẩm có trong kho hàng"
+                               name="number" min="0">
+                    </div>
                 </div>
               {{--   <div class="form-group">
                     <label for="img">Hình ảnh:</label>
@@ -99,7 +120,9 @@
                   @if($errors->has('sale_price'))
                     {{ $errors->first('sale_price') }}
                 @endif
+
                 <input type="submit" value="Lưu" class="btn btn-success btn-lg btn-block">
+                </div>
             </form>
         </div>
         {{--<div class="col-md-4">--}}

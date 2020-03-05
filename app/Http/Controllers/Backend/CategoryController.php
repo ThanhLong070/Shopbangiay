@@ -61,7 +61,7 @@ class CategoryController extends Controller
         $category->slug            = Str::slug($category->name);
         $category->save();
 
-        return redirect()->route('category.index')->with(['level' => 'success', 'msg' => 'Bạn đã thêm thành công!']);
+        return redirect()->back()->with(['level' => 'success', 'msg' => 'Bạn đã thêm thành công!']);
     }
 
     /**

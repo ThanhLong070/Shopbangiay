@@ -19,7 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('product_id');
             $table->integer('quantity');
             $table->float('price', 10, 0);
-            $table->float('sale_price', 10, 0);
+            $table->float('sale_price', 10, 0)->nullable();
             $table->timestamps();
         });
     }

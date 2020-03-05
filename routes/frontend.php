@@ -25,4 +25,11 @@ Route::get('/tracking','Frontend\HomeController@tracking')->name('tracking');
 Route::get('/{slug}.php','Frontend\HomeController@view')->name('view');
 
 Route::get('/contact', 'Frontend\HomeController@getContactUs')->name('getContactUs');
+
 Route::post('/contact', 'Frontend\HomeController@postContactUS')->name('postContactUS');
+
+Route::get('/thuong-hieu/{id}', 'Frontend\HomeController@getBrand')->name('getBrand');
+
+Route::get('/loc-gia', 'Frontend\HomeController@filterPrice')->name('filter');
+
+Route::get('/tim-kiem', 'Frontend\HomeController@getSearch')->name('search');

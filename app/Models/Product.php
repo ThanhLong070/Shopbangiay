@@ -28,8 +28,16 @@ class Product extends Model
     public function product_img(){
         return $this->hasMany('App\Models\Product_images','product_id','id');
     }
-
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+    public  function brand()
+    {
+        return $this->belongsTo('App\Models\Brand');
+    }
     public function orm_category(){
        return $this->belongsTo(Category::class,'cat_id','id');
    }
+
 }

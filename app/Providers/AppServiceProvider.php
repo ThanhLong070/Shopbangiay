@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Brand;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -46,6 +47,10 @@ class AppServiceProvider extends ServiceProvider
             $siteSettings =  Option::select('option', 'value')->get()->keyBy('option')->pluck('value', 'option');
             View::share('siteSettings', $siteSettings);
         }
+        View::composer('*', function ($view) {
+            $listBrands = Brand::all();
+            $view->with('listBrands', $listBrands);
+        });
 //        if(Schema::hasTable('product_images')) {
 //            $product_images= DB::table('product_images')->orderBy('product_id','DESC')->paginate(4);
 //            View::share('product_images', $product_images);

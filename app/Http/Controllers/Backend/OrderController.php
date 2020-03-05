@@ -29,8 +29,6 @@ class OrderController extends Controller
         if ($request->status == 2 && $order->detail) {
             foreach ($order->detail as $itemDetail) {
                 $product = Product::findOrFail($itemDetail->product_id);
-//                $product->number = $product->number - $itemDetail->quantity;
-
                 $product->save();
             }
         }
@@ -75,7 +73,6 @@ class OrderController extends Controller
             if ($order->status == 2 && $order->detail) {
                 foreach ($order->detail as $itemDetail) {
                     $product = Product::findOrFail($itemDetail->product_id);
-//                    $product->number = $product->number - $itemDetail->quantity;
                     $product->save();
                 }
             }
@@ -92,7 +89,6 @@ class OrderController extends Controller
         $product_count = Order::count();
         $order_count = 12;
         $cus_count = 12;
-        // $orders = Order::where('status',0)->get();
         return view('backend/admin',compact('product_count','order_count','cus_count'));
     }
 

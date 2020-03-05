@@ -41,13 +41,15 @@
 					<div class="s_product_text">
 						<h3>{{ $product->name }}</h3>
 						@if($product->sale_price>0)
-						<h2>{{ number_format($product->price,0,',',' ') }} VNĐ <span>->sale:{{ number_format($product->sale_price,0,',',' ') }} VNĐ
+						<h2>{{ number_format($product->price,0,',',' ') }} VNĐ <span>-> sale: {{ number_format($product->sale_price,0,',',' ') }} VNĐ
 						</span></h2>
 						@else
 							<h2>{{ number_format($product->price,0,',',' ') }} VNĐ</h2>
 						@endif
 						<ul class="list">
+							<li><a class="active" href="#"><span>Thương hiệu</span> : {{ $product->brand->name }}</a></li>
 							<li><a class="active" href="#"><span>Danh mục</span> : {{ $product->orm_category->name }}</a></li>
+							<li><a href="#"><span>Tình trạng</span> : Còn hàng</a></li>
 						</ul>
 						<span>{!!$product->description!!}</span>
 						 {{--<div class="product_count">--}}

@@ -88,8 +88,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $data = User::findOrFail($id);
-        return view('user.edit', compact('data'));
+        $user = User::findOrFail($id);
+        return view('user.edit', compact('user'));
     }
 
     /**
@@ -137,5 +137,21 @@ class UserController extends Controller
     {
        User::findOrFail($id)->delete();
        return redirect()->route('user.index')->with(['level' => 'success', 'msg' => 'Xóa thành công!']);
+    }
+    public function ajax(Request $request)
+    {
+
+        $id = $request->id;
+        $action = $request->action;
+        if ($action == 'update') {
+            $user = User::findOrFail($id);
+            $user->role = 1;
+            if ($user->role == 1) {
+                $user->save();
+            }
+            return json_encode(true);
+        }
+        return json_encode(false);
+
     }
 }

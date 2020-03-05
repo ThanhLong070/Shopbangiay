@@ -14,7 +14,7 @@
                 </div>
             @endif
             @include('backend.blocks.error')
-            <form method="POST" action="{{ route('user.update', $user->id) }}">
+            <form method="POST" action="{{ route('user.update', $user->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="form-group">

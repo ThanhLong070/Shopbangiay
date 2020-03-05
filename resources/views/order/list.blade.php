@@ -105,9 +105,7 @@
                             }
                             else
                                 alert('no');
-
                         });
-
                 }
             });
             $(document).on('click', '.update', function () {

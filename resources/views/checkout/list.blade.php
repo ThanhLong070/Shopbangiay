@@ -34,7 +34,7 @@
                           <td>{{ $cus->name }}</td>
                           <td>{{ $cus->email }}</td>
                           <td>{{ $cus->address }}</td>
-                          <td>{{ $cus->phone }}</td>
+                          <td>0{{ $cus->phone }}</td>
                           <td>{{ $cus->note }}</td>
                         </tr>
                     @endforeach

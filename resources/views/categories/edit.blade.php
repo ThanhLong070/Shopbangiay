@@ -29,7 +29,6 @@
                     </select>
                 </div>
                 <input type="submit" value="Lưu" class="btn btn-success btn-lg btn-block">
-                {{--<input type="hidden" name="_token" value="{{ Session::token() }}">--}}
             </form>
         </div>
     </div>

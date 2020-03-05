@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  *@property mixed product_id
- * @property  image
+
  * @property string|null image
+ * @method static findOrFail($product_id)
  */
 class Product_images extends Model
 {

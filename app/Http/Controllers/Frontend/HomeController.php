@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Frontend; 
 
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Customer;
@@ -11,6 +12,7 @@ use App\Models\Order;
 use App\Models\Product_images;
 use App\Models\Slide;
 use Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
@@ -34,8 +36,8 @@ class HomeController extends Controller
 
         function about(){
             $categories= Category::where('category_parent','=',0)->orderBy('name','ASC')->get();
-            $products= Product::limit(6)->orderBy('name','DESC')->get();
-            return view('home/about',compact('categories','products'));
+            $listProducts= Product::orderBy('name','DESC')->get();
+            return view('home/about',compact('categories','listProducts'));
         }
 
         function product(){
@@ -83,19 +85,15 @@ class HomeController extends Controller
          */
         public function postContactUS(Request $req)
     {
-
-        $data = [
+        Mail::send('mail',[
             'name' => $req->name,
             'email' => $req->email,
             'phone' => $req->phone,
-            'body' => $req->message
-        ];
-
-        Mail::send('mail', $data, function ($message) use ($data) {
-            $message->from($data['email']);
-            $message->to($data['email'], 'thông tin phản hồi')->subject('Thông tin phản hồi');
+            'body' => $req->message,
+        ], function ($message) use ($req) {
+            $message->from($req->email);
+            $message->to('adupacpac1234@gmail.com',$req->name)->subject('Thông tin phản hồi');
         });
-
         return redirect()->back()->with('success', 'Cảm ơn bạn đã đóng gióp ý kiến cho chúng tôi');
 
     }
@@ -104,5 +102,23 @@ class HomeController extends Controller
     {
         return view('home/contact');
     }
+    public function getBrand($id)
+    {
+        $brand = Brand::where('id', $id)->first();
+        $listProducts = Product::select('id', 'cat_id', 'brand_id', 'name', 'price', 'sale_price', 'image','slug','status','number')->where('brand_id', $brand->id)->where('status', 1)->where('number', '>', 0)->paginate(24);
+        return view('home.about', compact('listProducts'));
 
+    }
+    public function filterPrice(Request $request)
+    {
+        $price = $request->price;
+        $listProducts = Product::select('id', 'cat_id', 'brand_id', 'name', 'price', 'sale_price','image','slug','status','number')->whereBetween('price', explode(',', $price))->where('status', 1)->where('number', '>', 0)->paginate(24);
+        return view('home.about', ['listProducts' => $listProducts->appends(Input::except('page'))]);
+    }
+    public function getSearch(Request $request)
+    {
+        $listProducts = Product::select('id', 'cat_id', 'brand_id', 'name', 'price', 'sale_price', 'number', 'image', 'status', 'slug')->where('name', 'like', '%' . $request->keyword . '%')->orWhere('price',$request->keyword)->orWhere('sale_price',$request->keyword)->where('status', 1)->where('number', '>', 0)->paginate(24);
+        return view('home.about', compact('listProducts'));
+
+    }
     }
